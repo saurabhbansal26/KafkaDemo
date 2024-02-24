@@ -1,0 +1,17 @@
+[
+  {
+    "accountNumber" : 101,
+    "accountName"   : "ULTRA Short Bond",
+    "accountSymbol" : "ULTRA"
+  },
+  {
+    "accountNumber" : 102,
+    "accountName"   : "ICICI Bluechip",
+    "accountSymbol" : "Bluechip"
+  },
+  {
+    "accountNumber" : 103,
+    "accountName"   : "Hybrid Bond",
+    "accountSymbol" : "Hybrid"
+  }
+]

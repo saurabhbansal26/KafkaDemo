@@ -1,0 +1,20 @@
+server:
+  port: 8443
+
+spring:
+  kafka:
+    consumer:
+      enable-auto-commit: true
+      bootstrap-servers: localhost:9092
+      group-id: account_consumer_group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
