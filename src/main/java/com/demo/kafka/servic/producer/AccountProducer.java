@@ -4,6 +4,7 @@ import com.demo.kafka.model.Account;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,9 @@ import java.util.List;
 @Slf4j
 @Service
 public class AccountProducer {
+
+    @Value("${spring.kafka.topic.account}")
+    public String topic;
 
     @Autowired
     private KafkaTemplate<String, Object> kafkaTemplate;
@@ -31,7 +35,7 @@ public class AccountProducer {
     }
 
     public void sendDataToKafka(int partitionNo){
-        kafkaTemplate.send("testTopic", partitionNo, "accounts", readDataFromJson());
+        kafkaTemplate.send(topic, partitionNo, "accounts", readDataFromJson());
     }
 
     public List<Account> getData(){

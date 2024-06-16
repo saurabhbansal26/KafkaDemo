@@ -31,6 +31,9 @@ public class AccountConsumer {
     @Value("${spring.kafka.consumer.value-deserializer}")
     String valueDeserializer;
 
+    @Value("${spring.kafka.topic.account}")
+    public String topic;
+
     public List<Account> getDataFromKafka(int partitionNo){
         List<Account> accountList = new ArrayList<>();
         Properties properties = new Properties();
@@ -41,8 +44,12 @@ public class AccountConsumer {
         properties.put("value-deserializer", valueDeserializer);
 
         KafkaConsumer<String, Object> consumer = new KafkaConsumer<>(properties);
-        TopicPartition topicPartition = new TopicPartition("testTopic", partitionNo);
+        TopicPartition topicPartition = new TopicPartition(topic, partitionNo);
         consumer.assign(List.of(topicPartition));
+
+        //If you want to read from a particular offset
+        //consumer.seek(topicPartition, 3);
+
         ConsumerRecords<String, Object> records = consumer.poll(Duration.ofSeconds(5));
 
         if(!records.isEmpty()){
